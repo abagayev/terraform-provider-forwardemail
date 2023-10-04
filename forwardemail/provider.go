@@ -3,6 +3,7 @@ package forwardemail
 import (
 	"context"
 
+	"github.com/abagayev/go-forwardemail/forwardemail"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
@@ -18,10 +19,17 @@ func Provider() *schema.Provider {
 				Description: "The API key for API operations.",
 			},
 		},
+		DataSourcesMap: map[string]*schema.Resource{
+			"forwardemail_account": dataSourceAccount(),
+		},
 		ConfigureContextFunc: providerConfigure,
 	}
 }
 
 func providerConfigure(c context.Context, d *schema.ResourceData) (interface{}, diag.Diagnostics) {
-	return nil, nil
+	client := forwardemail.NewClient(forwardemail.ClientOptions{
+		ApiKey: d.Get("api_key").(string),
+	})
+
+	return client, diag.Diagnostics{}
 }

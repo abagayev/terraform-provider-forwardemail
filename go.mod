@@ -5,6 +5,7 @@ go 1.21.1
 require github.com/hashicorp/terraform-plugin-sdk/v2 v2.29.0
 
 require (
+	github.com/abagayev/go-forwardemail v0.0.0-20231004202501-265d842512f0 // indirect
 	github.com/agext/levenshtein v1.2.2 // indirect
 	github.com/apparentlymart/go-textseg/v15 v15.0.0 // indirect
 	github.com/fatih/color v1.13.0 // indirect
