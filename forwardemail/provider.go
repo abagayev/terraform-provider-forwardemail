@@ -19,6 +19,9 @@ func Provider() *schema.Provider {
 				Description: "The API key for API operations.",
 			},
 		},
+		ResourcesMap: map[string]*schema.Resource{
+			"forwardemail_domain": resourceDomain(),
+		},
 		DataSourcesMap: map[string]*schema.Resource{
 			"forwardemail_account": dataSourceAccount(),
 		},

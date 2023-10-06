@@ -14,7 +14,7 @@ provider "forwardemail" {
 
 data forwardemail_account "account" {}
 
-output "account_email" {
-  value = data.forwardemail_account.account.email
+resource forwardemail_domain domain {
+  name = "test.com"
 }
 ```

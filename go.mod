@@ -1,16 +1,18 @@
 module github.com/abagayev/terraform-provider-forwardemail
 
-go 1.21.1
-
-require github.com/hashicorp/terraform-plugin-sdk/v2 v2.29.0
+go 1.21
 
 require (
-	github.com/abagayev/go-forwardemail v0.0.0-20231004202501-265d842512f0 // indirect
+	github.com/abagayev/go-forwardemail v0.0.0-20231006200356-6646c097af92
+	github.com/google/go-cmp v0.5.9
+	github.com/hashicorp/terraform-plugin-sdk/v2 v2.29.0
+)
+
+require (
 	github.com/agext/levenshtein v1.2.2 // indirect
 	github.com/apparentlymart/go-textseg/v15 v15.0.0 // indirect
 	github.com/fatih/color v1.13.0 // indirect
 	github.com/golang/protobuf v1.5.3 // indirect
-	github.com/google/go-cmp v0.5.9 // indirect
 	github.com/hashicorp/errwrap v1.0.0 // indirect
 	github.com/hashicorp/go-cty v1.4.1-0.20200414143053-d3edf31b6320 // indirect
 	github.com/hashicorp/go-hclog v1.5.0 // indirect

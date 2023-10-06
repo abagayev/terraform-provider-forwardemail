@@ -1,7 +1,5 @@
-github.com/abagayev/go-forwardemail v0.0.0-20231004195553-2223e0710d5a h1:6WRMo4l7Jre1Uw5KEl06I2A2JQvKvxSTK/FbbL0MgJ0=
-github.com/abagayev/go-forwardemail v0.0.0-20231004195553-2223e0710d5a/go.mod h1:TxPTtX63Ee4IaDLjQ7Sot6Jg0D7jIhuPe/Bky/ME9YY=
-github.com/abagayev/go-forwardemail v0.0.0-20231004202501-265d842512f0 h1:chnuvXoEWGkYKnlJUbjkYjm8NarB6A/G1yaklW2t1Fw=
-github.com/abagayev/go-forwardemail v0.0.0-20231004202501-265d842512f0/go.mod h1:TxPTtX63Ee4IaDLjQ7Sot6Jg0D7jIhuPe/Bky/ME9YY=
+github.com/abagayev/go-forwardemail v0.0.0-20231006200356-6646c097af92 h1:wRh/So+OawNaoY/F3rqeJ/3l/A5Z312HqfaDBfhr0wM=
+github.com/abagayev/go-forwardemail v0.0.0-20231006200356-6646c097af92/go.mod h1:hAa3jUy0ibvoaApCmXSuQHZuVj/kX1Lqc6e6aLQjgJI=
 github.com/agext/levenshtein v1.2.2 h1:0S/Yg6LYmFJ5stwQeRp6EeOcCbj7xiqQSdNelsXvaqE=
 github.com/agext/levenshtein v1.2.2/go.mod h1:JEDfjyjHDjOF/1e4FlBE/PkbqA9OfWu2ki2W0IB5558=
 github.com/apparentlymart/go-textseg/v12 v12.0.0/go.mod h1:S/4uRK2UtaQttw1GenVJEynmyUenKwP++x/+DdGV/Ec=
