@@ -21,6 +21,7 @@ func Provider() *schema.Provider {
 		},
 		ResourcesMap: map[string]*schema.Resource{
 			"forwardemail_domain": resourceDomain(),
+			"forwardemail_alias":  resourceAlias(),
 		},
 		DataSourcesMap: map[string]*schema.Resource{
 			"forwardemail_account": dataSourceAccount(),
