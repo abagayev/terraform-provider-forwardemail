@@ -3,7 +3,7 @@ module github.com/abagayev/terraform-provider-forwardemail
 go 1.21
 
 require (
-	github.com/abagayev/go-forwardemail v0.0.0-20231010204811-6902ca30f17f
+	github.com/abagayev/go-forwardemail v1.0.0
 	github.com/google/go-cmp v0.5.9
 	github.com/hashicorp/terraform-plugin-log v0.9.0
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.29.0

@@ -15,7 +15,14 @@ provider "forwardemail" {
 
 data forwardemail_account "account" {}
 
-resource forwardemail_domain domain {
-  name = "test.com"
+resource forwardemail_domain stark {
+  name = "stark.com"
+}
+
+resource "forwardemail_alias" james {
+  name   = "tony"
+  domain = forwardemail_domain.stark.name
+
+  recipients = ["james@rhodes.com"]
 }
 ```
