@@ -1,7 +1,6 @@
 package forwardemail
 
 import (
-	"os"
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -29,8 +28,8 @@ func TestProviderImpl(t *testing.T) {
 	}
 }
 
-func testAccPreCheck(t *testing.T) {
-	if v := os.Getenv("FORWARDEMAIL_API_KEY"); v == "" {
-		t.Fatal("FORWARDEMAIL_API_KEY must be set for acceptance tests")
-	}
-}
+//func testAccPreCheck(t *testing.T) {
+//	if v := os.Getenv("FORWARDEMAIL_API_KEY"); v == "" {
+//		t.Fatal("FORWARDEMAIL_API_KEY must be set for acceptance tests")
+//	}
+//}
