@@ -21,8 +21,15 @@ jobs:
         with:
           version: v1.54
 
+      - uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: '1.6.*'
+          terraform_wrapper: false
+
       - name: Test
         run: go test -race -coverprofile=coverage.out -covermode=atomic ./...
+        env:
+          TF_ACC: '1'
 
       - name: Upload coverage
         uses: codecov/codecov-action@v3
