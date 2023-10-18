@@ -19,10 +19,39 @@ func TestAccForwardemailDomain_basic(t *testing.T) {
 		CheckDestroy:      testAccCheckForwardemailDomainDestroy,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccCheckForwardemailDomainConfig_basic(name),
+				Config: fmt.Sprintf(testAccCheckForwardemailDomainConfig_basic, name),
 				Check: resource.ComposeTestCheckFunc(
 					testAccCheckForwardemailDomainExists("forwardemail_domain.test", &domain),
 					resource.TestCheckResourceAttr("forwardemail_domain.test", "name", name),
+				),
+			},
+		},
+	})
+}
+
+func TestAccForwardemailDomain_change_attr(t *testing.T) {
+	var domain forwardemail.Domain
+	name := "stark.com"
+
+	resource.Test(t, resource.TestCase{
+		PreCheck:          func() { testAccPreCheck(t) },
+		ProviderFactories: testAccForwardemailProviderFactories,
+		CheckDestroy:      testAccCheckForwardemailDomainDestroy,
+		Steps: []resource.TestStep{
+			{
+				Config: fmt.Sprintf(testAccCheckForwardemailDomainConfig_basic, name),
+				Check: resource.ComposeTestCheckFunc(
+					testAccCheckForwardemailDomainExists("forwardemail_domain.test", &domain),
+					resource.TestCheckResourceAttr("forwardemail_domain.test", "name", name),
+					resource.TestCheckResourceAttr("forwardemail_domain.test", "has_virus_protection", "true"),
+				),
+			},
+			{
+				Config: fmt.Sprintf(testAccCheckForwardemailDomainConfig_without_virus_protection, name),
+				Check: resource.ComposeTestCheckFunc(
+					testAccCheckForwardemailDomainExists("forwardemail_domain.test", &domain),
+					resource.TestCheckResourceAttr("forwardemail_domain.test", "name", name),
+					resource.TestCheckResourceAttr("forwardemail_domain.test", "has_virus_protection", "false"),
 				),
 			},
 		},
@@ -72,10 +101,16 @@ func testAccCheckForwardemailDomainDestroy(s *terraform.State) error {
 	return nil
 }
 
-func testAccCheckForwardemailDomainConfig_basic(name string) string {
-	return fmt.Sprintf(`
-		resource "forwardemail_domain" "test" {
-			name = "%s"
-		}
-	`, name)
-}
+const testAccCheckForwardemailDomainConfig_basic = `
+	resource "forwardemail_domain" "test" {
+		name = "%s"
+	}
+`
+
+const testAccCheckForwardemailDomainConfig_without_virus_protection = `
+	resource "forwardemail_domain" "test" {
+		name = "%s"
+
+		has_virus_protection = false
+	}
+`
