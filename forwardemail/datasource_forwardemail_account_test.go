@@ -13,7 +13,7 @@ func TestAccDataSourceForwardemailDomain_basic(t *testing.T) {
 		ProviderFactories: testAccForwardemailProviderFactories,
 		Steps: []resource.TestStep{
 			{
-				Config: fmt.Sprintf(testAccCheckDataSourceForwardemailAccountConfig_basic),
+				Config: fmt.Sprint(testAccCheckDataSourceForwardemailAccountConfig_basic),
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttrSet("data.forwardemail_account.test", "email"),
 				),
