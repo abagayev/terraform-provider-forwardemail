@@ -60,6 +60,8 @@ func resourceAliasCreate(ctx context.Context, d *schema.ResourceData, meta inter
 	params := forwardemail.AliasParameters{
 		HasRecipientVerification: toBool(d.Get("has_recipient_verification")),
 		IsEnabled:                toBool(d.Get("is_enabled")),
+		Recipients:               toSliceOfStrings(toChanges(nil, d.Get("recipients"))),
+		Labels:                   toSliceOfStrings(toChanges(nil, d.Get("labels"))),
 	}
 
 	alias, err := client.CreateAlias(domain, name, params)
@@ -114,11 +116,13 @@ func resourceAliasUpdate(ctx context.Context, d *schema.ResourceData, meta inter
 	domain := d.Get("domain").(string)
 	name := d.Id()
 
+	// N.B.: we can't use d.GetChange because Forward Email API is working not as expected.
+	// So instead of passing only changed parameters we need to pass all of them.
 	params := forwardemail.AliasParameters{}
-	params.HasRecipientVerification = toBool(toChange(d.GetChange("has_recipient_verification")))
-	params.IsEnabled = toBool(toChange(d.GetChange("is_enabled")))
-	params.Recipients = toSliceOfStrings(toChanges(d.GetChange("recipients")))
-	params.Labels = toSliceOfStrings(toChanges(d.GetChange("labels")))
+	params.HasRecipientVerification = toBool(toChange(nil, d.Get("has_recipient_verification")))
+	params.IsEnabled = toBool(toChange(nil, d.Get("is_enabled")))
+	params.Recipients = toSliceOfStrings(toChanges(nil, d.Get("recipients")))
+	params.Labels = toSliceOfStrings(toChanges(nil, d.Get("labels")))
 
 	_, err := client.UpdateAlias(domain, name, params)
 	if err != nil {
