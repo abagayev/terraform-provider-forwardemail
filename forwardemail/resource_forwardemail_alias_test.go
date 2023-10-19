@@ -11,8 +11,9 @@ import (
 
 func TestAccForwardemailAlias_basic(t *testing.T) {
 	var alias forwardemail.Alias
-	domain := "stark.com"
-	name := "james"
+	domain := fake.Internet().Domain()
+	name := fake.Internet().User()
+	recipient := fake.Internet().FreeEmail()
 
 	resource.Test(t, resource.TestCase{
 		PreCheck:          func() { testAccPreCheck(t) },
@@ -20,7 +21,7 @@ func TestAccForwardemailAlias_basic(t *testing.T) {
 		CheckDestroy:      testAccCheckForwardemailAliasDestroy,
 		Steps: []resource.TestStep{
 			{
-				Config: fmt.Sprintf(testAccCheckForwardemailAliasConfig_basic, domain, name),
+				Config: fmt.Sprintf(testAccCheckForwardemailAliasConfig_basic, domain, name, recipient),
 				Check: resource.ComposeTestCheckFunc(
 					testAccCheckForwardemailAliasExists("forwardemail_alias.test", &alias),
 					resource.TestCheckResourceAttr("forwardemail_alias.test", "domain", domain),
@@ -33,8 +34,9 @@ func TestAccForwardemailAlias_basic(t *testing.T) {
 
 func TestAccForwardemailAlias_disable(t *testing.T) {
 	var alias forwardemail.Alias
-	domain := "stark.com"
-	name := "james"
+	domain := fake.Internet().Domain()
+	name := fake.Internet().User()
+	recipient := fake.Internet().FreeEmail()
 
 	resource.Test(t, resource.TestCase{
 		PreCheck:          func() { testAccPreCheck(t) },
@@ -42,7 +44,7 @@ func TestAccForwardemailAlias_disable(t *testing.T) {
 		CheckDestroy:      testAccCheckForwardemailAliasDestroy,
 		Steps: []resource.TestStep{
 			{
-				Config: fmt.Sprintf(testAccCheckForwardemailAliasConfig_basic, domain, name),
+				Config: fmt.Sprintf(testAccCheckForwardemailAliasConfig_basic, domain, name, recipient),
 				Check: resource.ComposeTestCheckFunc(
 					testAccCheckForwardemailAliasExists("forwardemail_alias.test", &alias),
 					resource.TestCheckResourceAttr("forwardemail_alias.test", "domain", domain),
@@ -51,7 +53,7 @@ func TestAccForwardemailAlias_disable(t *testing.T) {
 				),
 			},
 			{
-				Config: fmt.Sprintf(testAccCheckForwardemailAliasConfig_disabled, domain, name),
+				Config: fmt.Sprintf(testAccCheckForwardemailAliasConfig_disabled, domain, name, recipient),
 				Check: resource.ComposeTestCheckFunc(
 					testAccCheckForwardemailAliasExists("forwardemail_alias.test", &alias),
 					resource.TestCheckResourceAttr("forwardemail_alias.test", "domain", domain),
@@ -115,7 +117,7 @@ const testAccCheckForwardemailAliasConfig_basic = `
 	  name   = "%s"
 	  domain = forwardemail_domain.test.name
 	
-	  recipients = ["james@rhodes.com"]
+	  recipients = ["%s"]
 	}
 `
 
@@ -128,7 +130,7 @@ const testAccCheckForwardemailAliasConfig_disabled = `
 	  name   = "%s"
 	  domain = forwardemail_domain.test.name
 	
-	  recipients = ["james@rhodes.com"]
+	  recipients = ["%s"]
       is_enabled = false 
 	}
 `

@@ -5,12 +5,16 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/jaswdr/faker"
 )
 
+var fake faker.Faker
 var testAccForwardemailProvider *schema.Provider
 var testAccForwardemailProviderFactories map[string]func() (*schema.Provider, error)
 
 func init() {
+	fake = faker.New()
+
 	testAccForwardemailProvider = Provider()
 	testAccForwardemailProviderFactories = map[string]func() (*schema.Provider, error){
 		"forwardemail": func() (*schema.Provider, error) {

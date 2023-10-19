@@ -11,7 +11,7 @@ import (
 
 func TestAccForwardemailDomain_basic(t *testing.T) {
 	var domain forwardemail.Domain
-	name := "stark.com"
+	name := fake.Internet().Domain()
 
 	resource.Test(t, resource.TestCase{
 		PreCheck:          func() { testAccPreCheck(t) },
@@ -31,7 +31,7 @@ func TestAccForwardemailDomain_basic(t *testing.T) {
 
 func TestAccForwardemailDomain_change_attr(t *testing.T) {
 	var domain forwardemail.Domain
-	name := "stark.com"
+	name := fake.Internet().Domain()
 
 	resource.Test(t, resource.TestCase{
 		PreCheck:          func() { testAccPreCheck(t) },
