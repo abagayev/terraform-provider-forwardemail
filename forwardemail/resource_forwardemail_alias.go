@@ -13,36 +13,42 @@ func resourceAlias() *schema.Resource {
 	return &schema.Resource{
 		Schema: map[string]*schema.Schema{
 			"domain": {
-				Type:     schema.TypeString,
-				Required: true,
+				Type:        schema.TypeString,
+				Required:    true,
+				Description: "Fully qualified domain name (FQDN).",
 			},
 			"name": {
-				Type:     schema.TypeString,
-				Required: true,
+				Type:        schema.TypeString,
+				Required:    true,
+				Description: "Alias name.",
 			},
 			"is_enabled": {
-				Type:     schema.TypeBool,
-				Optional: true,
-				Default:  true,
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Default:     true,
+				Description: "Whether to enable to disable this alias.",
 			},
 			"has_recipient_verification": {
-				Type:     schema.TypeBool,
-				Optional: true,
-				Default:  false,
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Default:     false,
+				Description: "Whether to enable to require recipients to click an email verification link for emails to flow through.",
 			},
 			"recipients": {
 				Type: schema.TypeList,
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
 				},
-				Optional: true,
+				Optional:    true,
+				Description: "List of recipients as valid email addresses, fully-qualified domain names (FQDN), IP addresses, or webhook URL's.",
 			},
 			"labels": {
 				Type: schema.TypeList,
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
 				},
-				Optional: true,
+				Optional:    true,
+				Description: "List of labels.",
 			},
 		},
 		CreateContext: resourceAliasCreate,

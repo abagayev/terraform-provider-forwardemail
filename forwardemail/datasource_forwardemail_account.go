@@ -12,20 +12,24 @@ func dataSourceAccount() *schema.Resource {
 	return &schema.Resource{
 		Schema: map[string]*schema.Schema{
 			"plan": {
-				Type:     schema.TypeString,
-				Computed: true,
+				Type:        schema.TypeString,
+				Computed:    true,
+				Description: "Plan type.",
 			},
 			"email": {
-				Type:     schema.TypeString,
-				Computed: true,
+				Type:        schema.TypeString,
+				Computed:    true,
+				Description: "Email address.",
 			},
 			"full_email": {
-				Type:     schema.TypeString,
-				Computed: true,
+				Type:        schema.TypeString,
+				Computed:    true,
+				Description: "Full email address.",
 			},
-			"display_mame": {
-				Type:     schema.TypeString,
-				Computed: true,
+			"display_name": {
+				Type:        schema.TypeString,
+				Computed:    true,
+				Description: "Display name.",
 			},
 		},
 		ReadContext: dataSourceAccountRead,
@@ -44,7 +48,7 @@ func dataSourceAccountRead(ctx context.Context, d *schema.ResourceData, meta int
 		"plan":         account.Plan,
 		"email":        account.Email,
 		"full_email":   account.FullEmail,
-		"display_mame": account.DisplayName,
+		"display_name": account.DisplayName,
 	} {
 		if err := d.Set(k, v); err != nil {
 			return diag.FromErr(err)
