@@ -42,6 +42,11 @@ func resourceAlias() *schema.Resource {
 				Optional:    true,
 				Description: "List of recipients as valid email addresses, fully-qualified domain names (FQDN), IP addresses, or webhook URL's.",
 			},
+			"description": {
+				Type:        schema.TypeString,
+				Optional:    true,
+				Description: "Alias description.",
+			},
 			"labels": {
 				Type: schema.TypeList,
 				Elem: &schema.Schema{
@@ -68,6 +73,7 @@ func resourceAliasCreate(ctx context.Context, d *schema.ResourceData, meta inter
 		IsEnabled:                toBool(d.Get("is_enabled")),
 		Recipients:               toSliceOfStrings(toChanges(nil, d.Get("recipients"))),
 		Labels:                   toSliceOfStrings(toChanges(nil, d.Get("labels"))),
+		Description:              d.Get("description").(string),
 	}
 
 	alias, err := client.CreateAlias(domain, name, params)
@@ -81,6 +87,7 @@ func resourceAliasCreate(ctx context.Context, d *schema.ResourceData, meta inter
 		"is_enabled":                 alias.IsEnabled,
 		"recipients":                 alias.Recipients,
 		"labels":                     alias.Labels,
+		"description":                alias.Description,
 	} {
 		if err := d.Set(k, v); err != nil {
 			return diag.FromErr(err)
@@ -108,6 +115,7 @@ func resourceAliasRead(ctx context.Context, d *schema.ResourceData, meta interfa
 		"is_enabled":                 alias.IsEnabled,
 		"recipients":                 alias.Recipients,
 		"labels":                     alias.Labels,
+		"description":                alias.Description,
 	} {
 		if err := d.Set(k, v); err != nil {
 			return diag.FromErr(err)
@@ -129,6 +137,7 @@ func resourceAliasUpdate(ctx context.Context, d *schema.ResourceData, meta inter
 	params.IsEnabled = toBool(toChange(nil, d.Get("is_enabled")))
 	params.Recipients = toSliceOfStrings(toChanges(nil, d.Get("recipients")))
 	params.Labels = toSliceOfStrings(toChanges(nil, d.Get("labels")))
+	params.Description = d.Get("description").(string)
 
 	_, err := client.UpdateAlias(domain, name, params)
 	if err != nil {
